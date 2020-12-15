@@ -1,3 +1,4 @@
+include ':WiFiMap-SDK-1.0.1-beta'
 include ':app'
 
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")

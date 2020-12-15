@@ -1,5 +1,9 @@
+import 'dart:math' show cos, sqrt, asin;
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -7,12 +11,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _counter = "data";
   static const platform =
       const MethodChannel('samples.flutter.dev/wifimap.sample');
   List<Map<String, dynamic>> listHotspot = [];
+  List<double> distanceList = [];
 
   bool _isInit = true, _isLoad = false;
+
+  double calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
+  }
+
+  getNearMeHotspot(double lat, double lng) {
+    for (var i = 1; i < listHotspot.length; i++) {
+      // print(listHotspot[i]['longitude']);
+      // print(i);
+      double dist = calculateDistance(
+          lat,
+          lng,
+          double.parse(listHotspot[i]['Location(latitude']),
+          double.parse(listHotspot[i]['longitude'].split(')').first));
+      // Geodesy geodesy = Geodesy();
+      // LatLng l1 = LatLng(lat, lng);
+      // LatLng l2 = LatLng(double.parse(listHotspot[i]['Location(latitude']),
+      //     double.parse(listHotspot[i]['longitude'].split(')').first));
+      // print(geodesy.distanceBetweenTwoGeoPoints(l1, l2));
+      distanceList.add(dist);
+      // print(listHotspot[i]['Secured(password'] == null
+      //     ? "hello"
+      //     : listHotspot[i]['Secured(password'].split(')))').first +
+      //         listHotspot[i]['HotspotPlace(title'] +
+      //         " " +
+      //         dist.toString());
+    }
+    print(distanceList);
+  }
 
   @override
   void didChangeDependencies() async {
@@ -22,10 +60,20 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           _isLoad = true;
         });
+        LocationPermission permission;
+        permission = await Geolocator.checkPermission();
+        if (permission == LocationPermission.deniedForever) {
+          return Future.error(
+              'Location permissions are permantly denied, we cannot request permissions.');
+        }
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+
         final result = await platform.invokeMethod('fetch', {
-          "lat": 53.9000,
-          "lng": 27.5667,
+          "lat": position.latitude,
+          "lng": position.longitude,
         });
+        print(result);
         setState(() {
           _isLoad = false;
         });
@@ -33,7 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
         newStr.map((e) {
           List<dynamic> listFirst = e.split(',');
           Map<String, dynamic> map = {};
-
           listFirst.map((val) {
             List<dynamic> listSplitVal = val.split('=');
             print(listSplitVal);
@@ -49,8 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
           }).toList();
           listHotspot.add(map);
         }).toList();
-        print(listHotspot[1]['HotspotPlace(title']);
-        _counter = newStr[1].toString();
+        // print(listHotspot[1]['HotspotPlace(title']);
+        getNearMeHotspot(position.latitude, position.longitude);
       } on PlatformException catch (e) {
         print(e);
       } catch (e) {
@@ -121,20 +168,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           value: place,
                           title: "Category : ",
                         ),
-                        NameValuePair(
-                          value: listHotspot[i]['Location(latitude'],
-                          title: "Latitude : ",
-                        ),
-                        NameValuePair(
-                          value: longitude,
-                          title: "Longitude : ",
-                        ),
+                        // NameValuePair(
+                        //   value: listHotspot[i]['Location(latitude'],
+                        //   title: "Latitude : ",
+                        // ),
+                        // NameValuePair(
+                        //   value: longitude,
+                        //   title: "Longitude : ",
+                        // ),
                       ],
                     ),
                   ),
                 );
               },
-              itemCount: listHotspot.length,
+              itemCount: listHotspot.length > 5 ? 6 : listHotspot.length,
             ),
     );
   }

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/WiFiMap-SDK-1.0.2-beta.aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/jars/libs/r-classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

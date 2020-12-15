@@ -27,7 +27,6 @@ import java.lang.Exception
 class MainActivity: FlutterActivity, HotspotFetchControllerSubscriber,
         HotspotDataControllerListener {
     private val CHANNEL = "samples.flutter.dev/wifimap.sample"
-
     private var recentLocation: LatLng? = null
     private var fetchController: HotspotFetchController? = null
     private var dataController: HotspotDataController? = null

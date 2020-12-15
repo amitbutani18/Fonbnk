@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WiFiMap-SDK-1.0.1-beta/WiFiMap-SDK-1.0.1-beta.iml" filepath="$PROJECT_DIR$/.idea/modules/WiFiMap-SDK-1.0.1-beta/WiFiMap-SDK-1.0.1-beta.iml" group="android/WiFiMap-SDK-1.0.1-beta" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/466642389/geolocator.iml" filepath="$PROJECT_DIR$/.idea/modules/466642389/geolocator.iml" group="android/geolocator" />
+    </modules>
+  </component>
+</project>
