@@ -42,14 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
       //     double.parse(listHotspot[i]['longitude'].split(')').first));
       // print(geodesy.distanceBetweenTwoGeoPoints(l1, l2));
       distanceList.add(dist);
-      // print(listHotspot[i]['Secured(password'] == null
-      //     ? "hello"
-      //     : listHotspot[i]['Secured(password'].split(')))').first +
-      //         listHotspot[i]['HotspotPlace(title'] +
-      //         " " +
-      //         dist.toString());
+      print(listHotspot[i]['User(user'] == null
+          ? "hello"
+          : listHotspot[i]['User(user'].split(')))').first);
     }
-    print(distanceList);
+    // print(distanceList);
   }
 
   @override
@@ -88,6 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
               if (listSplitVal.length == 3) {
                 map.putIfAbsent(
                     listSplitVal[1].trim(), () => listSplitVal[2].toString());
+              } else if (listSplitVal.length == 4) {
+                map.putIfAbsent(
+                    listSplitVal[2].trim(), () => listSplitVal[3].toString());
               } else {
                 map.putIfAbsent(
                     listSplitVal[0].trim(), () => listSplitVal[1].toString());
@@ -167,6 +167,32 @@ class _MyHomePageState extends State<MyHomePage> {
                         NameValuePair(
                           value: place,
                           title: "Category : ",
+                        ),
+                        NameValuePair(
+                          value: listHotspot[i]['Secured(password'] == null
+                              ? "-"
+                              : listHotspot[i]['Secured(password']
+                                  .split(')))')
+                                  .first,
+                          title: "Password : ",
+                        ),
+
+                        NameValuePair(
+                          value: listHotspot[i]['HotspotTip(createdAt'] == null
+                              ? "-"
+                              : listHotspot[i]['HotspotTip(createdAt']
+                                  .split(')))')
+                                  .first,
+                          title: "Created at : ",
+                        ),
+
+                        NameValuePair(
+                          value: listHotspot[i]['HotspotUser(name'] == null
+                              ? "-"
+                              : listHotspot[i]['HotspotUser(name']
+                                  .split(')))')
+                                  .first,
+                          title: "Hotspot user : ",
                         ),
                         // NameValuePair(
                         //   value: listHotspot[i]['Location(latitude'],
