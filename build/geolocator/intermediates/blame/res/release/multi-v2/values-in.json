@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/darshan/Desktop/TIKTOK/Fonbnk/build/geolocator/intermediates/res/merged/release/values-in/values-in.xml",
+            "outputFile": "/Users/darshan/Desktop/Fonbnk/build/geolocator/intermediates/incremental/mergeReleaseResources/merged.dir/values-in/values-in.xml",
             "map": [
                 {
                     "source": "/Users/darshan/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/values-in/values-in.xml",
@@ -57,7 +57,7 @@
             ]
         },
         {
-            "outputFile": "/Users/darshan/Desktop/TIKTOK/Fonbnk/build/geolocator/intermediates/incremental/mergeReleaseResources/merged.dir/values-in/values-in.xml",
+            "outputFile": "/Users/darshan/Desktop/Fonbnk/build/geolocator/intermediates/res/merged/release/values-in/values-in.xml",
             "map": [
                 {
                     "source": "/Users/darshan/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/values-in/values-in.xml",

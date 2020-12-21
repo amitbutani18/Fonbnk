@@ -541,6 +541,7 @@ Referenced Strings:
   /index.html
   /jvm/functions/Function
   /jvm/internal/
+  /proc/net/arp
   /reflect/KFunction
   /settings
   /sys/devices/system/cpu/
@@ -669,6 +670,7 @@ Referenced Strings:
   BOTTOM_OVERLAYS
   BROWSER_COMPATIBLE_DATE_FORMATS
   BROWSER_COMPATIBLE_DATE_FORMAT_STRINGS
+  BSSID
   BYTE
   BYTES
   BYTE_STRING
@@ -875,6 +877,7 @@ Referenced Strings:
   DescriptorVisibilities.PUBLIC
   Destroying.
   Destructured
+  Device
   DeviceOrientation.landscapeLeft
   DeviceOrientation.landscapeRight
   DeviceOrientation.portraitDown
@@ -931,7 +934,9 @@ Referenced Strings:
   Entry
   EntryRef
   Enum
+  Error
   ErrorReporter.DO_NOTHING
+  Exception
   Expect
   Expires
   ExtensionFunctionType
@@ -1044,6 +1049,7 @@ Referenced Strings:
   HTTP_1_1
   HTTP_1_1_REQUIRED
   HTTP_2
+  HWAddr
   Handler
   HandlerLeak
   HapticFeedback.vibrate
@@ -1096,6 +1102,7 @@ Referenced Strings:
   INVERT_COLORS
   IN_IN_OUT_POSITION
   IN_VARIANCE
+  IPAddr
   ISIZE
   ISO_8859_1
   IS_BUTTON
@@ -1599,6 +1606,7 @@ Referenced Strings:
   SKIP_LOWER
   SOURCE
   SPDY_3
+  SSID
   SSL_
   SSL_3_0
   SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA
@@ -1819,6 +1827,7 @@ Referenced Strings:
   TLSv1.1
   TLSv1.2
   TLSv1.3
+  TODO
   TOO_LATE_TO_CANCEL
   TOP_LEVEL_FUNCTION
   TOP_LEVEL_PROPERTY
@@ -1962,8 +1971,15 @@ Referenced Strings:
   WHEN_RESOLVE_DECLARATION
   WHEN_RESOLVING_DEFAULT_TYPE_ARGUMENTS
   WHEN_TYPING
+  WIFI_AP_STATE_DISABLED
+  WIFI_AP_STATE_DISABLING
+  WIFI_AP_STATE_ENABLED
+  WIFI_AP_STATE_ENABLING
+  WIFI_AP_STATE_FAILED
   WINDOW_UPDATE
   WORDS
+  WPA
+  WPA2
   Warning
   Watchdog
   WiFiMap/
@@ -2141,11 +2157,13 @@ Referenced Strings:
   android.intent.action.RUN
   android.intent.action.VIEW
   android.intent.category.DEFAULT
+  android.net.wifi.SCAN_RESULTS
   android.os.Build
   android.people
   android.permission.ACCESS_BACKGROUND_...
   android.permission.ACCESS_COARSE_LOCA...
   android.permission.ACCESS_FINE_LOCATION
+  android.permission.ACCESS_NETWORK_STATE
   android.permission.ACCESS_WIFI_STATE
   android.settings.APPLICATION_DETAILS_...
   android.settings.LOCATION_SOURCE_SETT...
@@ -3138,6 +3156,7 @@ Referenced Strings:
   direction
   directory
   discard
+  disconnect
   dislikesCount
   dislikes_count
   dispatch
@@ -3401,6 +3420,7 @@ Referenced Strings:
   finalizeFinishingState
   find
   findAll
+  findAndConnect
   findAnyOf
   findAnyOf$StringsKt__StringsKt
   findByFqName
@@ -3496,6 +3516,7 @@ Referenced Strings:
   forWebSocket
   forbidden
   forceAndroidLocationManager
+  forceWifiUsage
   forceWrapper
   forever
   forget
@@ -3511,6 +3532,7 @@ Referenced Strings:
   frame
   frameHeader
   framework
+  frequency
   friends
   from
   from.declaredTypeParameters
@@ -3586,6 +3608,7 @@ Referenced Strings:
   getArrayType
   getAuthorDeviceId
   getAvailableCpuPermits
+  getBSSID
   getBackend
   getBasicOverridabilityProblem
   getBeanDefinition
@@ -3641,6 +3664,7 @@ Referenced Strings:
   getClassifierNames
   getClient
   getClient$okhttp
+  getClientList
   getCloseCause$annotations
   getClosedForReceive
   getClosedForSend
@@ -3689,6 +3713,7 @@ Referenced Strings:
   getCreatedWorkers
   getCriteria
   getCurrentPosition
+  getCurrentSignalStrength
   getData
   getData$okio
   getDate
@@ -3748,6 +3773,7 @@ Referenced Strings:
   getFqNameSafe
   getFqNameSafeIfPossible
   getFqNameUnsafe
+  getFrequency
   getFunctionByName
   getFunctionByNameOrNull
   getFunctionFlags
@@ -3770,6 +3796,7 @@ Referenced Strings:
   getHotspotsManager
   getHpackWriter
   getHttpCode
+  getIP
   getId
   getIdentifier
   getIdleAtNs$okhttp
@@ -3982,6 +4009,7 @@ Referenced Strings:
   getReviews
   getRouteDatabase
   getRouteFailureCount$okhttp
+  getSSID
   getSTATIC_HEADER_TABLE
   getScheme$okhttp
   getScope
@@ -4079,7 +4107,12 @@ Referenced Strings:
   getVariance
   getVisibility
   getVisibility$annotations
+  getWiFiAPPreSharedKey
+  getWiFiAPSSID
+  getWiFiAPState
   getWidth
+  getWifiApConfiguration
+  getWifiApState
   getWrapperFqName
   getWriteAbortCount$okhttp
   getWriteBytesMaximum
@@ -4170,6 +4203,7 @@ Referenced Strings:
   helpRemove
   helpRemovePrev
   hex
+  hidden
   high
   hintOnError
   hints
@@ -4445,6 +4479,7 @@ Referenced Strings:
   isCompatible
   isCompleted
   isCompletedExceptionally
+  isConnected
   isConst
   isConst$annotations
   isConstructedFromGivenClass
@@ -4470,6 +4505,7 @@ Referenced Strings:
   isEligible$okhttp
   isEmpty
   isEmptyImpl
+  isEnabled
   isEnum
   isEnumEntry
   isEnumSpecialMethod
@@ -4559,15 +4595,18 @@ Referenced Strings:
   isPrivate
   isPropertyWithBackingFieldInOuterClass
   isPublic
+  isReachable
   isReadOnly
   isRecoverable
   isRedirect
+  isRegisteredWifiNetwork
   isReified
   isReifiedTypeParameter
   isRemoved
   isReturnTypeMoreSpecific
   isRoot
   isRunning
+  isSSIDHidden
   isSafeIdentifier
   isSameClass
   isScopedCoroutine
@@ -4617,6 +4656,7 @@ Referenced Strings:
   isVisibleIgnoringReceiver
   isVisibleWithAnyReceiver
   isVoidMethod
+  isWiFiAPEnabled
   isWrapperClassName
   is_deleted
   is_mocked
@@ -4742,6 +4782,7 @@ Referenced Strings:
   joinSuspend
   joinTo
   joinToString
+  join_once
   jsonTree
   jsr305State
   jvmDescriptor
@@ -5065,6 +5106,7 @@ Referenced Strings:
   loadProperty
   loadResource
   loadReturnType
+  loadWifiList
   local
   localCertificates
   localClassifierTypeSettings
@@ -5485,6 +5527,7 @@ Referenced Strings:
   onTimeout
   oneTimeCode
   onlyIfCached
+  onlyReachables
   op
   opaque
   open
@@ -5712,6 +5755,7 @@ Referenced Strings:
   platformTrustManager
   playProviderFactory
   plugins
+  plugins.wififlutter.io/wifi_scan
   plus
   plusAssign
   plusElement
@@ -5738,6 +5782,7 @@ Referenced Strings:
   postfix
   postponedRoutes
   preHandler
+  preSharedKey
   precise
   predicate
   preferences
@@ -5894,6 +5939,7 @@ Referenced Strings:
   rawBoundReceiver
   rawSocket
   rawType
+  reachableTimeout
   read
   readAll
   readAndWriteUnsafe
@@ -6068,6 +6114,7 @@ Referenced Strings:
   removeValue$kotlin_stdlib
   removeView
   removeViewImmediate
+  removeWifiNetwork
   removed
   removedHash
   renderCallable
@@ -6290,6 +6337,7 @@ Referenced Strings:
   secure
   secureConnectEnd
   secureConnectStart
+  security
   seed
   seedFunction
   segment
@@ -6360,6 +6408,7 @@ Referenced Strings:
   setDistance
   setDownloadSpeed
   setDropOriginalInContainingParts
+  setEnabled
   setEncodedFragment$okhttp
   setEncodedPassword$okhttp
   setEncodedPathSegment
@@ -6397,6 +6446,7 @@ Referenced Strings:
   setListener
   setLng
   setLocale
+  setMACFiltering
   setMarkerType
   setModality
   setName
@@ -6430,6 +6480,7 @@ Referenced Strings:
   setReviewText
   setReviews
   setRouteFailureCount$okhttp
+  setSSIDHidden
   setScheme$okhttp
   setScopeDefinition
   setSecondaryTypes
@@ -6458,7 +6509,12 @@ Referenced Strings:
   setValue
   setValueParameters
   setVisibility
+  setWiFiAPEnabled
+  setWiFiAPPreSharedKey
+  setWiFiAPSSID
   setWidth
+  setWifiApConfiguration
+  setWifiApEnabled
   setWriteAbortCount$okhttp
   setWriteBytesMaximum$okhttp
   setWriteBytesTotal$okhttp
@@ -7033,6 +7089,7 @@ Referenced Strings:
   usePrivatePool
   usePrivatePool$kotlinx_coroutines_core
   useSite
+  useWifi
   user
   userAgent
   userDataKey
@@ -7118,6 +7175,7 @@ Referenced Strings:
   width
   wifi
   wifiManager.connectionInfo
+  wifi_iot
   wifivenues
   window
   windowSizeIncrement
@@ -7545,7 +7603,7 @@ attr:imageAspectRatio:2130771982,
    layout:notification_template_icon_group:2131165188,
    layout:notification_template_part_chronometer:2131165189,
    layout:notification_template_part_time:2131165190,
-   mipmap:ic_launcher:2131230720,
+   mipmap:launcher_icon:2131230722,
    string:captive_password:2131296257,
    string:category_bank_or_atm:2131296258,
    string:category_car_services:2131296259,
@@ -7628,6 +7686,7 @@ Skipped unused resource res/drawable/common_google_signin_btn_text_disabled.xml:
 Skipped unused resource res/drawable/common_google_signin_btn_text_light.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable/common_google_signin_btn_text_light_focused.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable/common_google_signin_btn_text_light_normal.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
+Skipped unused resource res/drawable-v24/ic_launcher_foreground.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_4bf58dd8d48988d10a951735.png: 109 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_4bf58dd8d48988d113951735.png: 110 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_4bf58dd8d48988d116941735.png: 158 bytes (replaced with small dummy file of size 67 bytes)
@@ -7675,6 +7734,7 @@ Skipped unused resource res/drawable-ldpi-v4/ic_entertainment.png: 156 bytes (re
 Skipped unused resource res/drawable-ldpi-v4/ic_food_and_drinks.png: 198 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_health_and_beauty.png: 241 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_housing.png: 180 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/drawable-ldpi-v4/ic_launcher_background.png: 395 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_lock_off.png: 339 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_lock_on.png: 318 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-ldpi-v4/ic_medical.png: 156 bytes (replaced with small dummy file of size 67 bytes)
@@ -7742,6 +7802,7 @@ Skipped unused resource res/drawable-mdpi-v4/ic_entertainment.png: 129 bytes (re
 Skipped unused resource res/drawable-mdpi-v4/ic_food_and_drinks.png: 190 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-mdpi-v4/ic_health_and_beauty.png: 290 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-mdpi-v4/ic_housing.png: 199 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/drawable-mdpi-v4/ic_launcher_background.png: 462 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-mdpi-v4/ic_lock_off.png: 400 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-mdpi-v4/ic_lock_on.png: 374 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-mdpi-v4/ic_medical.png: 138 bytes (replaced with small dummy file of size 67 bytes)
@@ -7809,6 +7870,7 @@ Skipped unused resource res/drawable-hdpi-v4/ic_entertainment.png: 190 bytes (re
 Skipped unused resource res/drawable-hdpi-v4/ic_food_and_drinks.png: 282 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-hdpi-v4/ic_health_and_beauty.png: 415 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-hdpi-v4/ic_housing.png: 263 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/drawable-hdpi-v4/ic_launcher_background.png: 586 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-hdpi-v4/ic_lock_off.png: 584 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-hdpi-v4/ic_lock_on.png: 525 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-hdpi-v4/ic_medical.png: 177 bytes (replaced with small dummy file of size 67 bytes)
@@ -7876,6 +7938,7 @@ Skipped unused resource res/drawable-xhdpi-v4/ic_entertainment.png: 167 bytes (r
 Skipped unused resource res/drawable-xhdpi-v4/ic_food_and_drinks.png: 296 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xhdpi-v4/ic_health_and_beauty.png: 496 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xhdpi-v4/ic_housing.png: 264 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/drawable-xhdpi-v4/ic_launcher_background.png: 675 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xhdpi-v4/ic_lock_off.png: 719 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xhdpi-v4/ic_lock_on.png: 653 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xhdpi-v4/ic_medical.png: 217 bytes (replaced with small dummy file of size 67 bytes)
@@ -7943,6 +8006,7 @@ Skipped unused resource res/drawable-xxhdpi-v4/ic_entertainment.png: 214 bytes (
 Skipped unused resource res/drawable-xxhdpi-v4/ic_food_and_drinks.png: 456 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxhdpi-v4/ic_health_and_beauty.png: 743 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxhdpi-v4/ic_housing.png: 449 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/drawable-xxhdpi-v4/ic_launcher_background.png: 958 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxhdpi-v4/ic_lock_off.png: 956 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxhdpi-v4/ic_lock_on.png: 843 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxhdpi-v4/ic_medical.png: 294 bytes (replaced with small dummy file of size 67 bytes)
@@ -8004,6 +8068,7 @@ Skipped unused resource res/drawable-xxxhdpi-v4/ic_entertainment.png: 260 bytes 
 Skipped unused resource res/drawable-xxxhdpi-v4/ic_food_and_drinks.png: 553 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxxhdpi-v4/ic_health_and_beauty.png: 983 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxxhdpi-v4/ic_housing.png: 488 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/drawable-xxxhdpi-v4/ic_launcher_background.png: 1171 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxxhdpi-v4/ic_lock_off.png: 1370 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxxhdpi-v4/ic_lock_on.png: 1037 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/drawable-xxxhdpi-v4/ic_medical.png: 391 bytes (replaced with small dummy file of size 67 bytes)
@@ -8067,6 +8132,7 @@ Skipped unused resource res/drawable-anydpi-v24/ic_entertainment.xml: -1 bytes (
 Skipped unused resource res/drawable-anydpi-v24/ic_food_and_drinks.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-anydpi-v24/ic_health_and_beauty.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-anydpi-v24/ic_housing.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
+Skipped unused resource res/drawable-anydpi-v24/ic_launcher_background.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-anydpi-v24/ic_lock_on.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-anydpi-v24/ic_medical.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-anydpi-v24/ic_municipal_place.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
@@ -8080,9 +8146,15 @@ Skipped unused resource res/drawable-anydpi-v24/ic_service.xml: -1 bytes (replac
 Skipped unused resource res/drawable-anydpi-v24/ic_shopping.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/drawable-anydpi-v24/ic_transport.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/layout/custom_dialog.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
+Skipped unused resource res/mipmap-mdpi-v4/ic_launcher.png: 405 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/mipmap-mdpi-v4/ic_launcher_round.png: 2783 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-hdpi-v4/ic_launcher.png: 507 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/mipmap-hdpi-v4/ic_launcher_round.png: 4905 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xhdpi-v4/ic_launcher.png: 684 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/mipmap-xhdpi-v4/ic_launcher_round.png: 6895 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xxhdpi-v4/ic_launcher.png: 994 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/mipmap-xxhdpi-v4/ic_launcher_round.png: 10413 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xxxhdpi-v4/ic_launcher.png: 1406 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/mipmap-xxxhdpi-v4/ic_launcher_round.png: 15132 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-anydpi-v26/ic_launcher.xml: -1 bytes (replaced with small dummy file of size 104 bytes)
 Skipped unused resource res/mipmap-anydpi-v26/ic_launcher_round.xml: -1 bytes (replaced with small dummy file of size 104 bytes)

@@ -239,6 +239,7 @@ layout notification_template_part_chronometer
 layout notification_template_part_time
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap launcher_icon
 string app_name
 string captive_password
 string category_bank_or_atm

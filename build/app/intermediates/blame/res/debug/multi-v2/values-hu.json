@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/darshan/Desktop/TIKTOK/Fonbnk/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
+            "outputFile": "/Users/darshan/Desktop/Fonbnk/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
             "map": [
                 {
                     "source": "/Users/darshan/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/res/values-hu/values.xml",

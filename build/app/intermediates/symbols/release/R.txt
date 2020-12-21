@@ -238,6 +238,7 @@ int layout notification_template_part_chronometer 0x7f070005
 int layout notification_template_part_time 0x7f070006
 int mipmap ic_launcher 0x7f080000
 int mipmap ic_launcher_round 0x7f080001
+int mipmap launcher_icon 0x7f080002
 int string app_name 0x7f090000
 int string captive_password 0x7f090001
 int string category_bank_or_atm 0x7f090002

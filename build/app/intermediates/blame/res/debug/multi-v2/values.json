@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/darshan/Desktop/TIKTOK/Fonbnk/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/darshan/Desktop/Fonbnk/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/Users/darshan/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/res/values/values.xml",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/darshan/Desktop/TIKTOK/Fonbnk/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/darshan/Desktop/Fonbnk/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

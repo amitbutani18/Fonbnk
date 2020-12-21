@@ -242,6 +242,12 @@
       "languageVersion": "2.10"
     },
     {
+      "name": "wifi_iot",
+      "rootUri": "file:///Users/darshan/Desktop/flutter/.pub-cache/hosted/pub.dartlang.org/wifi_iot-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "xml",
       "rootUri": "file:///Users/darshan/Desktop/flutter/.pub-cache/hosted/pub.dartlang.org/xml-4.5.1",
       "packageUri": "lib/",
@@ -260,7 +266,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-12-15T12:19:24.430163Z",
+  "generated": "2020-12-19T09:40:27.557903Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }

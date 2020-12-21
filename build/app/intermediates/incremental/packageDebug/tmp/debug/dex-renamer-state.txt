@@ -1,7 +1,7 @@
-#Wed Dec 16 17:52:13 IST 2020
-base.0=/Users/darshan/Desktop/TIKTOK/Fonbnk/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+#Mon Dec 21 15:50:02 IST 2020
+base.0=/Users/darshan/Desktop/Fonbnk/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/darshan/Desktop/TIKTOK/Fonbnk/build/app/intermediates/dex/debug/mergeDexDebug/out/classes2.dex
+base.1=/Users/darshan/Desktop/Fonbnk/build/app/intermediates/dex/debug/mergeDexDebug/out/classes2.dex
