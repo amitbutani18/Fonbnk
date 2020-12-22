@@ -1,4 +1,0 @@
-#Sat Dec 19 15:57:07 IST 2020
-base.0=/Users/darshan/Desktop/Fonbnk/build/app/intermediates/transforms/r8/release/0/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
