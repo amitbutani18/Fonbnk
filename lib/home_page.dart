@@ -53,6 +53,38 @@ class _MyHomePageState extends State<MyHomePage> {
   //   print(distanceList);
   // }
 
+  List<WifiNetwork> _htResultNetwork = [];
+
+  storeAndConnect(String psSSID, String psKey) async {
+    // await storeAPInfos();
+    await WiFiForIoTPlugin.setWiFiAPSSID(psSSID);
+    await WiFiForIoTPlugin.setWiFiAPPreSharedKey(psKey);
+  }
+
+  Future<List<WifiNetwork>> loadWifiList() async {
+    List<WifiNetwork> htResultNetwork;
+    try {
+      htResultNetwork = await WiFiForIoTPlugin.loadWifiList();
+      for (var i = 0; i < htResultNetwork.length; i++) {
+        if (htResultNetwork[i].capabilities == "[ESS]") {
+          _htResultNetwork.add(htResultNetwork[i]);
+          print("capabilities " + htResultNetwork[i].capabilities);
+          print("bssid " + htResultNetwork[i].bssid);
+          print("frequency " + htResultNetwork[i].frequency.toString());
+          print("level" + htResultNetwork[i].level.toString());
+          print("ssid " + htResultNetwork[i].ssid);
+          print(htResultNetwork[i].password);
+        }
+      }
+      print(_htResultNetwork);
+      _htResultNetwork = htResultNetwork;
+      setState(() {});
+    } on PlatformException {
+      htResultNetwork = List<WifiNetwork>();
+    }
+    return htResultNetwork;
+  }
+
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
@@ -129,11 +161,30 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadWifiList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF08B15B),
         title: Text("Fonbnk"),
+      ),
+      bottomNavigationBar: Container(
+        height: 70,
+        color: Colors.red.withOpacity(.3),
+        padding: EdgeInsets.all(15),
+        child: Center(
+          child: Text(
+            "You are not allowed to connect password protected hotspot.",
+            maxLines: 2,
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
       ),
       body: _isLoad
           ? Center(
@@ -142,282 +193,431 @@ class _MyHomePageState extends State<MyHomePage> {
             ))
           : Stack(
               children: [
-                newListHotspot.length == 0
+                newListHotspot.length == 0 && _htResultNetwork.length == 0
                     ? Center(
                         child: Text("No data found"),
                       )
-                    : ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, i) {
-                          // if (i == 0) {
-                          //   return GestureDetector(
-                          //     onTap: _isConnecting
-                          //         ? null
-                          //         : () async {
-                          //             print("object");
-                          //             Scaffold.of(context).hideCurrentSnackBar();
-                          //             setState(() {
-                          //               _isConnecting = true;
-                          //             });
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, i) {
+                                return GestureDetector(
+                                  onTap: _isConnecting
+                                      ? null
+                                      : () async {
+                                          print("object");
+                                          Scaffold.of(context)
+                                              .hideCurrentSnackBar();
+                                          setState(() {
+                                            _isConnecting = true;
+                                          });
+                                          var status =
+                                              await WiFiForIoTPlugin.connect(
+                                                  _htResultNetwork[i].ssid,
+                                                  joinOnce: true,
+                                                  security:
+                                                      NetworkSecurity.NONE);
+                                          setState(() {
+                                            _isConnecting = false;
+                                          });
+                                          if (status) {
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                "Conneted successfully",
+                                              ),
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              backgroundColor: Colors.green,
+                                            ));
+                                          } else {
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                "Something went wrong!",
+                                              ),
+                                              backgroundColor: Colors.red,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                            ));
+                                          }
+                                          print(status);
+                                        },
+                                  child: Container(
+                                    // height: 100,
+                                    margin: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFFffffff),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 5,
+                                              spreadRadius: 1,
+                                              offset: Offset(0, 1))
+                                        ],
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(18.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          NameValuePair(
+                                            value: _htResultNetwork[i].ssid,
+                                            title: "Title : ",
+                                          ),
+                                          NameValuePair(
+                                            value: _htResultNetwork[i].bssid,
+                                            title: "Bssid : ",
+                                          ),
+                                          NameValuePair(
+                                            value: _htResultNetwork[i]
+                                                .frequency
+                                                .toString(),
+                                            title: "Frequency : ",
+                                          ),
+                                          // NameValuePair(
+                                          //   value: place,
+                                          //   title: "Category : ",
+                                          // ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Password : ",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  _htResultNetwork[i]
+                                                              .capabilities ==
+                                                          "[ESS]"
+                                                      ? "Open"
+                                                      : "Password protected",
+                                                  maxLines: null,
+                                                  style: TextStyle(
+                                                      color: _htResultNetwork[i]
+                                                                  .capabilities ==
+                                                              "[ESS]"
+                                                          ? Colors.green
+                                                          : Colors.red),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          // NameValuePair(
+                                          //   value: _htResultNetwork[i]
+                                          //               .capabilities ==
+                                          //           "[ESS]"
+                                          //       ? "Open"
+                                          //       : "Password prot",
+                                          //   title: "Password : ",
+                                          // ),
 
-                          //             var status = await WiFiForIoTPlugin.connect(
-                          //                 'Calendar',
-                          //                 password: 'Denny@123',
-                          //                 joinOnce: true,
-                          //                 security: NetworkSecurity.WPA);
-                          //             setState(() {
-                          //               _isConnecting = false;
-                          //             });
-                          //             if (status) {
-                          //               Scaffold.of(context).showSnackBar(SnackBar(
-                          //                 content: Text(
-                          //                   "Conneted successfully",
-                          //                 ),
-                          //                 behavior: SnackBarBehavior.floating,
-                          //                 backgroundColor: Colors.green,
-                          //               ));
-                          //             } else {
-                          //               Scaffold.of(context).showSnackBar(SnackBar(
-                          //                 content: Text(
-                          //                   "Something went wrong!",
-                          //                 ),
-                          //                 backgroundColor: Colors.red,
-                          //                 behavior: SnackBarBehavior.floating,
-                          //               ));
-                          //             }
-                          //             print(status);
-                          //           },
-                          //     child: Container(
-                          //       // height: 100,
-                          //       margin: EdgeInsets.all(8),
-                          //       decoration: BoxDecoration(
-                          //           color: Color(0xFFffffff),
-                          //           boxShadow: [
-                          //             BoxShadow(
-                          //                 color: Colors.grey,
-                          //                 blurRadius: 5,
-                          //                 spreadRadius: 1,
-                          //                 offset: Offset(0, 1))
-                          //           ],
-                          //           borderRadius: BorderRadius.circular(8)),
-                          //       child: Padding(
-                          //         padding: const EdgeInsets.all(18.0),
-                          //         child: Column(
-                          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //           children: [
-                          //             NameValuePair(
-                          //               value: 'Calendar infotech',
-                          //               title: "Title : ",
-                          //             ),
-                          //             NameValuePair(
-                          //               value: 'Calendar',
-                          //               title: "Name : ",
-                          //             ),
-                          //             NameValuePair(
-                          //               value: "D Mart",
-                          //               title: "Address : ",
-                          //             ),
-                          //             NameValuePair(
-                          //               value: "Suart",
-                          //               title: "Category : ",
-                          //             ),
-                          //             NameValuePair(
-                          //               value: 'Denny@123',
-                          //               title: "Password : ",
-                          //             ),
-
-                          //             NameValuePair(
-                          //               value: newListHotspot[i]
-                          //                           ['HotspotTip(createdAt'] ==
-                          //                       null
-                          //                   ? "-"
-                          //                   : newListHotspot[i]
-                          //                           ['HotspotTip(createdAt']
-                          //                       .split(')))')
-                          //                       .first,
-                          //               title: "Created at : ",
-                          //             ),
-
-                          //             NameValuePair(
-                          //               value: '-',
-                          //               title: "Hotspot user : ",
-                          //             ),
-                          //             // NameValuePair(
-                          //             //   value: listHotspot[i]['Location(latitude'],
-                          //             //   title: "Latitude : ",
-                          //             // ),
-                          //             // NameValuePair(
-                          //             //   value: longitude,
-                          //             //   title: "Longitude : ",
-                          //             // ),
-                          //           ],
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   );
-                          // }
-                          String place = newListHotspot[i]['category'] == null
-                              ? "No category define"
-                              : newListHotspot[i]['category'].split(')').first;
-                          String longitude = newListHotspot[i]['longitude'] ==
-                                  null
-                              ? "No longitude define"
-                              : newListHotspot[i]['longitude'].split(')').first;
-                          return GestureDetector(
-                            onTap: _isConnecting
-                                ? null
-                                : () async {
-                                    print("object");
-                                    Scaffold.of(context).hideCurrentSnackBar();
-                                    setState(() {
-                                      _isConnecting = true;
-                                    });
-                                    var ssid = newListHotspot[i]
-                                            ['HotspotPlace(title']
-                                        .toString()
-                                        .substring(
-                                            1,
-                                            (newListHotspot[i]
-                                                        ['HotspotPlace(title']
-                                                    .toString()
-                                                    .length -
-                                                1));
-                                    var password = newListHotspot[i]
-                                                ['Secured(password'] ==
-                                            null
-                                        ? "-"
-                                        : newListHotspot[i]['Secured(password']
-                                            .split(')))')
-                                            .first
-                                            .toString()
-                                            .substring(
-                                                1,
-                                                (newListHotspot[i]
-                                                            ['Secured(password']
-                                                        .split(')))')
-                                                        .first
-                                                        .toString()
-                                                        .length -
-                                                    1));
-                                    print(ssid);
-                                    print(password);
-                                    var status = await WiFiForIoTPlugin.connect(
-                                        ssid,
-                                        password: password,
-                                        joinOnce: true,
-                                        security: NetworkSecurity.WPA);
-                                    setState(() {
-                                      _isConnecting = false;
-                                    });
-                                    if (status) {
-                                      Scaffold.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text(
-                                          "Conneted successfully",
-                                        ),
-                                        behavior: SnackBarBehavior.floating,
-                                        backgroundColor: Colors.green,
-                                      ));
-                                    } else {
-                                      Scaffold.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text(
-                                          "Something went wrong!",
-                                        ),
-                                        backgroundColor: Colors.red,
-                                        behavior: SnackBarBehavior.floating,
-                                      ));
-                                    }
-                                    print(status);
-                                  },
-                            child: Container(
-                              // height: 100,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFffffff),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 5,
-                                        spreadRadius: 1,
-                                        offset: Offset(0, 1))
-                                  ],
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    NameValuePair(
-                                      value: newListHotspot[i]
-                                          ['HotspotPlace(title'],
-                                      title: "Title : ",
+                                          NameValuePair(
+                                            value: DateTime.now()
+                                                .toIso8601String(),
+                                            title: "Created at : ",
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    NameValuePair(
-                                      value: newListHotspot[i]['ssid'],
-                                      title: "Name : ",
-                                    ),
-                                    NameValuePair(
-                                      value: newListHotspot[i]['street'],
-                                      title: "Address : ",
-                                    ),
-                                    NameValuePair(
-                                      value: place,
-                                      title: "Category : ",
-                                    ),
-                                    NameValuePair(
-                                      value: newListHotspot[i]
-                                                  ['Secured(password'] ==
-                                              null
-                                          ? "-"
-                                          : newListHotspot[i]
-                                                  ['Secured(password']
-                                              .split(')))')
-                                              .first,
-                                      title: "Password : ",
-                                    ),
-
-                                    NameValuePair(
-                                      value: newListHotspot[i]
-                                                  ['HotspotTip(createdAt'] ==
-                                              null
-                                          ? "-"
-                                          : newListHotspot[i]
-                                                  ['HotspotTip(createdAt']
-                                              .split(')))')
-                                              .first,
-                                      title: "Created at : ",
-                                    ),
-
-                                    NameValuePair(
-                                      value: newListHotspot[i]
-                                                  ['HotspotUser(name'] ==
-                                              null
-                                          ? "-"
-                                          : newListHotspot[i]
-                                                  ['HotspotUser(name']
-                                              .split(')))')
-                                              .first,
-                                      title: "Hotspot user : ",
-                                    ),
-                                    // NameValuePair(
-                                    //   value: listHotspot[i]['Location(latitude'],
-                                    //   title: "Latitude : ",
-                                    // ),
-                                    // NameValuePair(
-                                    //   value: longitude,
-                                    //   title: "Longitude : ",
-                                    // ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                );
+                              },
+                              itemCount: _htResultNetwork.length,
+                              // > 5 ? 6 : listHotspot.length,
                             ),
-                          );
-                        },
-                        itemCount: newListHotspot.length,
-                        // > 5 ? 6 : listHotspot.length,
+                            ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, i) {
+                                // if (i == 0) {
+                                //   return GestureDetector(
+                                //     onTap: _isConnecting
+                                //         ? null
+                                //         : () async {
+                                //             print("object");
+                                //             Scaffold.of(context).hideCurrentSnackBar();
+                                //             setState(() {
+                                //               _isConnecting = true;
+                                //             });
+
+                                //             var status = await WiFiForIoTPlugin.connect(
+                                //                 'Calendar',
+                                //                 password: 'Denny@123',
+                                //                 joinOnce: true,
+                                //                 security: NetworkSecurity.WPA);
+                                //             setState(() {
+                                //               _isConnecting = false;
+                                //             });
+                                //             if (status) {
+                                //               Scaffold.of(context).showSnackBar(SnackBar(
+                                //                 content: Text(
+                                //                   "Conneted successfully",
+                                //                 ),
+                                //                 behavior: SnackBarBehavior.floating,
+                                //                 backgroundColor: Colors.green,
+                                //               ));
+                                //             } else {
+                                //               Scaffold.of(context).showSnackBar(SnackBar(
+                                //                 content: Text(
+                                //                   "Something went wrong!",
+                                //                 ),
+                                //                 backgroundColor: Colors.red,
+                                //                 behavior: SnackBarBehavior.floating,
+                                //               ));
+                                //             }
+                                //             print(status);
+                                //           },
+                                //     child: Container(
+                                //       // height: 100,
+                                //       margin: EdgeInsets.all(8),
+                                //       decoration: BoxDecoration(
+                                //           color: Color(0xFFffffff),
+                                //           boxShadow: [
+                                //             BoxShadow(
+                                //                 color: Colors.grey,
+                                //                 blurRadius: 5,
+                                //                 spreadRadius: 1,
+                                //                 offset: Offset(0, 1))
+                                //           ],
+                                //           borderRadius: BorderRadius.circular(8)),
+                                //       child: Padding(
+                                //         padding: const EdgeInsets.all(18.0),
+                                //         child: Column(
+                                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //           children: [
+                                //             NameValuePair(
+                                //               value: 'Calendar infotech',
+                                //               title: "Title : ",
+                                //             ),
+                                //             NameValuePair(
+                                //               value: 'Calendar',
+                                //               title: "Name : ",
+                                //             ),
+                                //             NameValuePair(
+                                //               value: "D Mart",
+                                //               title: "Address : ",
+                                //             ),
+                                //             NameValuePair(
+                                //               value: "Suart",
+                                //               title: "Category : ",
+                                //             ),
+                                //             NameValuePair(
+                                //               value: 'Denny@123',
+                                //               title: "Password : ",
+                                //             ),
+
+                                //             NameValuePair(
+                                //               value: newListHotspot[i]
+                                //                           ['HotspotTip(createdAt'] ==
+                                //                       null
+                                //                   ? "-"
+                                //                   : newListHotspot[i]
+                                //                           ['HotspotTip(createdAt']
+                                //                       .split(')))')
+                                //                       .first,
+                                //               title: "Created at : ",
+                                //             ),
+
+                                //             NameValuePair(
+                                //               value: '-',
+                                //               title: "Hotspot user : ",
+                                //             ),
+                                //             // NameValuePair(
+                                //             //   value: listHotspot[i]['Location(latitude'],
+                                //             //   title: "Latitude : ",
+                                //             // ),
+                                //             // NameValuePair(
+                                //             //   value: longitude,
+                                //             //   title: "Longitude : ",
+                                //             // ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   );
+                                // }
+                                String place =
+                                    newListHotspot[i]['category'] == null
+                                        ? "No category define"
+                                        : newListHotspot[i]['category']
+                                            .split(')')
+                                            .first;
+                                String longitude =
+                                    newListHotspot[i]['longitude'] == null
+                                        ? "No longitude define"
+                                        : newListHotspot[i]['longitude']
+                                            .split(')')
+                                            .first;
+                                return GestureDetector(
+                                  onTap: _isConnecting
+                                      ? null
+                                      : () async {
+                                          print("object");
+                                          Scaffold.of(context)
+                                              .hideCurrentSnackBar();
+                                          setState(() {
+                                            _isConnecting = true;
+                                          });
+                                          var ssid = newListHotspot[i]
+                                                  ['HotspotPlace(title']
+                                              .toString()
+                                              .substring(
+                                                  1,
+                                                  (newListHotspot[i][
+                                                              'HotspotPlace(title']
+                                                          .toString()
+                                                          .length -
+                                                      1));
+                                          var password = newListHotspot[i]
+                                                      ['Secured(password'] ==
+                                                  null
+                                              ? "-"
+                                              : newListHotspot[i]
+                                                      ['Secured(password']
+                                                  .split(')))')
+                                                  .first
+                                                  .toString()
+                                                  .substring(
+                                                      1,
+                                                      (newListHotspot[i][
+                                                                  'Secured(password']
+                                                              .split(')))')
+                                                              .first
+                                                              .toString()
+                                                              .length -
+                                                          1));
+                                          print(ssid);
+                                          print(password);
+                                          var status =
+                                              await WiFiForIoTPlugin.connect(
+                                                  ssid,
+                                                  password: password,
+                                                  joinOnce: true,
+                                                  security:
+                                                      NetworkSecurity.WPA);
+                                          setState(() {
+                                            _isConnecting = false;
+                                          });
+                                          if (status) {
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                "Conneted successfully",
+                                              ),
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              backgroundColor: Colors.green,
+                                            ));
+                                          } else {
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                "Something went wrong!",
+                                              ),
+                                              backgroundColor: Colors.red,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                            ));
+                                          }
+                                          print(status);
+                                        },
+                                  child: Container(
+                                    // height: 100,
+                                    margin: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFFffffff),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 5,
+                                              spreadRadius: 1,
+                                              offset: Offset(0, 1))
+                                        ],
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(18.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          NameValuePair(
+                                            value: newListHotspot[i]
+                                                ['HotspotPlace(title'],
+                                            title: "Title : ",
+                                          ),
+                                          NameValuePair(
+                                            value: newListHotspot[i]['ssid'],
+                                            title: "Name : ",
+                                          ),
+                                          NameValuePair(
+                                            value: newListHotspot[i]['street'],
+                                            title: "Address : ",
+                                          ),
+                                          NameValuePair(
+                                            value: place,
+                                            title: "Category : ",
+                                          ),
+                                          NameValuePair(
+                                            value: newListHotspot[i]
+                                                        ['Secured(password'] ==
+                                                    null
+                                                ? "-"
+                                                : newListHotspot[i]
+                                                        ['Secured(password']
+                                                    .split(')))')
+                                                    .first,
+                                            title: "Password : ",
+                                          ),
+
+                                          NameValuePair(
+                                            value: newListHotspot[i][
+                                                        'HotspotTip(createdAt'] ==
+                                                    null
+                                                ? "-"
+                                                : newListHotspot[i]
+                                                        ['HotspotTip(createdAt']
+                                                    .split(')))')
+                                                    .first,
+                                            title: "Created at : ",
+                                          ),
+
+                                          NameValuePair(
+                                            value: newListHotspot[i]
+                                                        ['HotspotUser(name'] ==
+                                                    null
+                                                ? "-"
+                                                : newListHotspot[i]
+                                                        ['HotspotUser(name']
+                                                    .split(')))')
+                                                    .first,
+                                            title: "Hotspot user : ",
+                                          ),
+                                          // NameValuePair(
+                                          //   value: listHotspot[i]['Location(latitude'],
+                                          //   title: "Latitude : ",
+                                          // ),
+                                          // NameValuePair(
+                                          //   value: longitude,
+                                          //   title: "Longitude : ",
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              itemCount: newListHotspot.length,
+                              // > 5 ? 6 : listHotspot.length,
+                            ),
+                          ],
+                        ),
                       ),
                 _isConnecting
                     ? Center(

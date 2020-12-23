@@ -1,4 +1,4 @@
-#Tue Dec 22 12:10:34 IST 2020
+#Wed Dec 23 16:14:02 IST 2020
 base.0=/Users/darshan/Desktop/Fonbnk/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex
