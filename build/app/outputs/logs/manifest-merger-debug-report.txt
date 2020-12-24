@@ -6,6 +6,7 @@ INJECTED from /Users/darshan/Desktop/Fonbnk/android/app/src/main/AndroidManifest
 INJECTED from /Users/darshan/Desktop/Fonbnk/android/app/src/main/AndroidManifest.xml:1:1-48:12
 MERGED from /Users/darshan/Desktop/Fonbnk/android/app/src/main/AndroidManifest.xml:1:1-48:12
 MERGED from [WiFiMap-SDK-1.0.2-beta.aar] /Users/darshan/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/AndroidManifest.xml:2:1-17:12
+MERGED from [:connectivity] /Users/darshan/Desktop/Fonbnk/build/connectivity/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:geolocator] /Users/darshan/Desktop/Fonbnk/build/geolocator/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:wifi_iot] /Users/darshan/Desktop/Fonbnk/build/wifi_iot/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/darshan/.gradle/caches/transforms-2/files-2.1/2b16ac6c4193835014f293427ee35afa/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
@@ -131,6 +132,8 @@ INJECTED from /Users/darshan/Desktop/Fonbnk/android/app/src/main/AndroidManifest
 INJECTED from /Users/darshan/Desktop/Fonbnk/android/app/src/main/AndroidManifest.xml
 MERGED from [WiFiMap-SDK-1.0.2-beta.aar] /Users/darshan/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/AndroidManifest.xml:6:5-8:41
 MERGED from [WiFiMap-SDK-1.0.2-beta.aar] /Users/darshan/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/AndroidManifest.xml:6:5-8:41
+MERGED from [:connectivity] /Users/darshan/Desktop/Fonbnk/build/connectivity/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:connectivity] /Users/darshan/Desktop/Fonbnk/build/connectivity/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:geolocator] /Users/darshan/Desktop/Fonbnk/build/geolocator/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:geolocator] /Users/darshan/Desktop/Fonbnk/build/geolocator/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:wifi_iot] /Users/darshan/Desktop/Fonbnk/build/wifi_iot/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
@@ -193,6 +196,8 @@ INJECTED from /Users/darshan/Desktop/Fonbnk/android/app/src/debug/AndroidManifes
 		INJECTED from /Users/darshan/Desktop/Fonbnk/android/app/src/debug/AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [WiFiMap-SDK-1.0.2-beta.aar] /Users/darshan/.gradle/caches/transforms-2/files-2.1/1215215ef9ca9dcbaa7f378dd5545b30/WiFiMap-SDK-1.0.2-beta/AndroidManifest.xml:10:5-79
+MERGED from [:connectivity] /Users/darshan/Desktop/Fonbnk/build/connectivity/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-79
+MERGED from [:connectivity] /Users/darshan/Desktop/Fonbnk/build/connectivity/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-79
 MERGED from [:wifi_iot] /Users/darshan/Desktop/Fonbnk/build/wifi_iot/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-79
 MERGED from [:wifi_iot] /Users/darshan/Desktop/Fonbnk/build/wifi_iot/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-79
 	android:name
